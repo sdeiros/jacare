@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canal das Taxas · Saúde Única no Ambiente Urbano</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --verde: #1A9E78;
+      --verde-escuro: #0B3828;
+      --verde-claro: #72DEBA;
+      --verde-muted: #2D6B55;
+      --laranja: #C8522A;
+      --laranja-claro: #E8895F;
+      --creme: #F6F2EB;
+      --creme-escuro: #EDE8DE;
+      --cinza: #8A8880;
+      --texto: #1C1C1A;
+      --fundo: #0C1E19;
+      --fundo-2: #132B22;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--creme);
+      color: var(--texto);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: rgba(12, 30, 25, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(114, 222, 186, 0.15);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 58px;
+      transition: background 0.3s;
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.05rem;
+      color: var(--verde-claro);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 3px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--verde-claro);
+      background: rgba(114, 222, 186, 0.08);
+    }
+
+    /* ── HAMBURGER (mobile) ── */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      border: none;
+      background: none;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    @media (max-width: 700px) {
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 58px;
+        left: 0;
+        right: 0;
+        background: rgba(12, 30, 25, 0.98);
+        padding: 1rem 1.5rem;
+        gap: 0.2rem;
+        border-bottom: 1px solid rgba(114, 222, 186, 0.12);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+        padding: 10px 6px;
+      }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--fundo);
+      padding: 130px 2rem 90px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% 80%, rgba(26, 158, 120, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--verde);
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      line-height: 1.1;
+      color: #fff;
+      max-width: 800px;
+      margin: 0 auto 1.2rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--verde-claro);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.55);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-local {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(26, 158, 120, 0.12);
+      border: 1px solid rgba(26, 158, 120, 0.4);
+      color: var(--verde-claro);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 8px 18px;
+      border-radius: 100px;
+    }
+
+    .hero-divider {
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--laranja) 30%, var(--laranja) 70%, transparent);
+      margin-top: 0;
+    }
+
+    /* ── CONTADOR ── */
+    .contador-bloco {
+      background: var(--fundo-2);
+      padding: 4rem 2rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(114, 222, 186, 0.1);
+    }
+
+    .contador-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--laranja);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .contador-titulo {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 1.8rem;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contador-numero {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(4rem, 14vw, 10rem);
+      font-weight: 400;
+      line-height: 1;
+      color: #fff;
+      letter-spacing: -0.03em;
+      transition: color 0.3s;
+    }
+
+    .contador-numero span.unidade {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(1.2rem, 3vw, 2.2rem);
+      font-weight: 300;
+      color: var(--verde-claro);
+      margin-left: 0.3em;
+      letter-spacing: 0;
+    }
+
+    .contador-desc {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.4);
+      margin-top: 1.4rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contador-desc strong {
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 500;
+    }
+
+    .contador-fonte {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.2);
+      margin-top: 1rem;
+    }
+
+    .contador-fonte a {
+      color: var(--verde-muted);
+    }
+
+    .contador-pulso {
+      animation: pulso 0.9s ease-in-out;
+    }
+
+    @keyframes pulso {
+
+      0%,
+      100% {
+        color: #fff
+      }
+
+      50% {
+        color: var(--verde-claro)
+      }
+    }
+
+    /* ── NÚMEROS ── */
+    .numeros {
+      background: var(--laranja);
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: 700px) {
+      .numeros {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .numeros {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .numero-item {
+      text-align: center;
+      padding: 2.2rem 1.5rem;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .numero-item:last-child {
+      border-right: none;
+    }
+
+    .numero-valor {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: #fff;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .numero-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.7);
+      text-transform: uppercase;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    .numero-fonte {
+      font-size: 0.62rem;
+      color: rgba(255, 255, 255, 0.35);
+      margin-top: 8px;
+    }
+
+    .numero-fonte a {
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: underline;
+    }
+
+    /* ── SEÇÕES ── */
+    .section-wrap {
+      padding: 5rem 2rem;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--laranja);
+      text-transform: uppercase;
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-eyebrow::after {
+      content: '';
+      display: block;
+      flex: 1;
+      height: 1px;
+      background: var(--laranja);
+      opacity: 0.2;
+      max-width: 80px;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+      color: var(--verde-escuro);
+      letter-spacing: -0.01em;
+    }
+
+    .section-body {
+      font-size: 1rem;
+      font-weight: 300;
+      color: #4a4a48;
+      max-width: 660px;
+      line-height: 1.8;
+    }
+
+    .section-body p+p {
+      margin-top: 1em;
+    }
+
+    .divider {
+      max-width: 920px;
+      margin: 0 auto;
+      border: none;
+      border-top: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    .fonte-inline {
+      font-size: 0.7rem;
+      color: #aaa;
+      margin-top: 0.6rem;
+      font-style: italic;
+    }
+
+    .fonte-inline a {
+      color: var(--verde);
+      text-decoration: underline;
+    }
+
+    /* ── PILARES ── */
+    .pilares {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+    }
+
+    .pilar {
+      background: var(--fundo);
+      border-radius: 6px;
+      padding: 2rem 1.6rem;
+      border-top: 3px solid var(--verde);
+      transition: transform 0.2s;
+    }
+
+    .pilar:hover {
+      transform: translateY(-3px);
+    }
+
+    .pilar.laranja {
+      border-top-color: var(--laranja);
+    }
+
+    .pilar.roxo {
+      border-top-color: #7F77DD;
+    }
+
+    .pilar-titulo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+
+    .pilar-texto {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.65;
+    }
+
+    /* ── CAUSAS ── */
+    .causas {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .causa {
+      display: flex;
+      gap: 1.4rem;
+      align-items: flex-start;
+      background: #fff;
+      border-radius: 6px;
+      padding: 1.4rem 1.6rem;
+      border-left: 4px solid var(--laranja);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+      transition: box-shadow 0.2s;
+    }
+
+    .causa:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.09);
+    }
+
+    .causa-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--laranja);
+      line-height: 1;
+      min-width: 30px;
+      opacity: 0.6;
+    }
+
+    .causa-titulo {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--verde-escuro);
+      margin-bottom: 5px;
+    }
+
+    .causa-desc {
+      font-size: 0.87rem;
+      font-weight: 300;
+      color: #555;
+      line-height: 1.65;
+    }
+
+    /* ── MAPA ── */
+    .mapa-container {
+      margin-top: 2rem;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(26, 158, 120, 0.3);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .mapa-container iframe {
+      width: 100%;
+      height: 420px;
+      border: none;
+      display: block;
+    }
+
+    .mapa-legenda {
+      background: var(--fundo);
+      padding: 1rem 1.5rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .legenda-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .legenda-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .legenda-item span {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* ── ENTREVISTAS — vídeo único ── */
+    .entrevistas-wrap {
+      margin-top: 2rem;
+    }
+
+    .entrevistas-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      background: var(--fundo);
+      border-radius: 8px 8px 0 0;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: none;
+    }
+
+    @media (max-width: 580px) {
+      .entrevistas-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .entrevista-card {
+      padding: 1.4rem 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .entrevista-card:last-child {
+      border-right: none;
+    }
+
+    .entrevista-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .av-verde {
+      background: var(--verde);
+    }
+
+    .av-laranja {
+      background: var(--laranja);
+    }
+
+    .entrevista-nome {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: #fff;
+    }
+
+    .entrevista-cargo {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.4);
+      margin-top: 2px;
+    }
+
+    /* Player de vídeo único */
+    .video-unico {
+      background: #0a0a0a;
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-top: 2px solid var(--verde);
+      position: relative;
+    }
+
+    .video-unico iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      display: block;
+      border: none;
+    }
+
+    /* Placeholder quando sem link */
+    .video-placeholder {
+      aspect-ratio: 16/9;
+      background: #0e1e19;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .video-placeholder:hover {
+      background: #122619;
+    }
+
+    .play-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(26, 158, 120, 0.2);
+      border: 2px solid var(--verde);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .video-placeholder:hover .play-btn {
+      background: rgba(26, 158, 120, 0.35);
+      transform: scale(1.07);
+    }
+
+    .play-btn::after {
+      content: '';
+      border-left: 18px solid var(--verde-claro);
+      border-top: 11px solid transparent;
+      border-bottom: 11px solid transparent;
+      margin-left: 4px;
+    }
+
+    .video-label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.45);
+      letter-spacing: 0.03em;
+    }
+
+    .video-sublabel {
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.2);
+      margin-top: -0.5rem;
+    }
+
+    .video-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: var(--verde);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    /* ── GALERIA ── */
+    .galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 800px) {
+      .galeria-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .galeria-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Destaque: primeira foto ocupa 2 colunas × 2 linhas */
+    .foto-destaque {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .foto-item {
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--creme-escuro);
+      cursor: pointer;
+      aspect-ratio: 4/3;
+    }
+
+    .foto-destaque {
+      aspect-ratio: unset;
+    }
+
+    .foto-destaque .foto-inner {
+      height: 100%;
+    }
+
+    .foto-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .foto-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+
+    .foto-item:hover .foto-inner img {
+      transform: scale(1.06);
+    }
+
+    .foto-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 0.9rem 1rem;
+    }
+
+    .foto-item:hover .foto-overlay {
+      opacity: 1;
+    }
+
+    .foto-caption {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(0, 0, 0, 0.92);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+      background: none;
+      border: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .lightbox-close:hover {
+      opacity: 1;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.12);
+      border: none;
+      color: #fff;
+      font-size: 1.8rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    .lightbox-prev {
+      left: 1rem;
+    }
+
+    .lightbox-next {
+      right: 1rem;
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.55);
+      text-align: center;
+      white-space: nowrap;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 5px 14px;
+      border-radius: 100px;
+    }
+
+    /* ── PRIORIDADES ── */
+    .prioridades {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .prioridade {
+      display: flex;
+      gap: 1.6rem;
+      align-items: flex-start;
+      background: #fff;
+      border-radius: 6px;
+      padding: 1.5rem 1.6rem;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+      transition: box-shadow 0.2s;
+    }
+
+    .prioridade:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.09);
+    }
+
+    .prioridade-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: var(--verde-escuro);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    .prioridade-titulo {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--verde-escuro);
+      margin-bottom: 5px;
+    }
+
+    .prioridade-desc {
+      font-size: 0.87rem;
+      font-weight: 300;
+      color: #555;
+      line-height: 1.65;
+    }
+
+    /* ── IMPACTO ── */
+    .impacto {
+      background: var(--fundo);
+      padding: 5.5rem 2rem;
+      text-align: center;
+      border-top: 2px solid var(--laranja);
+      border-bottom: 2px solid var(--laranja);
+    }
+
+    .impacto blockquote {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+      line-height: 1.25;
+      color: #fff;
+      max-width: 720px;
+      margin: 0 auto 1.2rem;
+      font-style: italic;
+      letter-spacing: -0.01em;
+    }
+
+    .impacto blockquote em {
+      color: var(--verde-claro);
+      font-style: normal;
+    }
+
+    .impacto cite {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.3);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── EQUIPE ── */
+    .equipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .membro {
+      background: #fff;
+      border-radius: 6px;
+      padding: 1.3rem 1.2rem;
+      border-top: 3px solid var(--verde);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+      transition: box-shadow 0.2s;
+    }
+
+    .membro:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.09);
+    }
+
+    .membro-nome {
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--verde-escuro);
+    }
+
+    .membro-ra {
+      font-size: 0.74rem;
+      font-weight: 300;
+      color: #aaa;
+      margin-top: 3px;
+    }
+
+    .membro-tarefa {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--laranja);
+      margin-top: 8px;
+    }
+
+    /* ── REFERÊNCIAS ── */
+    .refs {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .ref {
+      background: #f2ede4;
+      border-left: 3px solid rgba(0, 0, 0, 0.12);
+      padding: 0.9rem 1.1rem;
+      border-radius: 0 5px 5px 0;
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: #555;
+      line-height: 1.65;
+      transition: border-color 0.2s;
+    }
+
+    .ref:hover {
+      border-color: var(--verde);
+    }
+
+    .ref-id {
+      font-weight: 700;
+      color: var(--laranja);
+      margin-right: 6px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--fundo);
+      color: rgba(255, 255, 255, 0.25);
+      text-align: center;
+      padding: 3rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 300;
+      border-top: 1px solid rgba(114, 222, 186, 0.08);
+      line-height: 1.9;
+    }
+
+    footer strong {
+      color: var(--verde-claro);
+      font-weight: 500;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── BACK TO TOP ── */
+    #back-top {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 300;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--verde);
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      box-shadow: 0 4px 16px rgba(26, 158, 120, 0.4);
+    }
+
+    #back-top.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    #back-top:hover {
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 700px) {
+      .section-wrap {
+        padding: 3.5rem 1.2rem;
+      }
+
+      .hero {
+        padding: 100px 1.2rem 60px;
+      }
+
+      .contador-bloco {
+        padding: 3rem 1.2rem;
+      }
+
+      .impacto {
+        padding: 4rem 1.2rem;
+      }
+
+      nav {
+        padding: 0 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-label="Visualizar foto">
+    <button class="lightbox-close" id="lb-close" aria-label="Fechar">×</button>
+    <button class="lightbox-nav lightbox-prev" id="lb-prev" aria-label="Anterior">‹</button>
+    <img src="" alt="" id="lb-img">
+    <button class="lightbox-nav lightbox-next" id="lb-next" aria-label="Próxima">›</button>
+    <span class="lightbox-caption" id="lb-caption"></span>
+  </div>
+
+  <!-- BACK TO TOP -->
+  <button id="back-top" aria-label="Voltar ao topo">↑</button>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a class="nav-logo" href="#">Canal das Taxas</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#saude-unica">Saúde Única</a></li>
+      <li><a href="#problema">Problema</a></li>
+      <li><a href="#entrevistas">Entrevistas</a></li>
+      <li><a href="#galeria">Galeria</a></li>
+      <li><a href="#acoes">Ações</a></li>
+      <li><a href="#equipe">Equipe</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-eyebrow">IBMR · Psicologia · Saúde Única · 2026</p>
+    <h1>Convivência entre humanos e <em>jacarés</em></h1>
+    <p class="hero-sub">Desafios para a Saúde Única no ambiente urbano, o caso do Canal das Taxas</p>
+    <span class="hero-local">📍 Recreio dos Bandeirantes · Rio de Janeiro</span>
+  </div>
+  <div class="hero-divider"></div>
+
+  <!-- CONTADOR -->
+  <div class="contador-bloco">
+    <p class="contador-eyebrow">Enquanto você lê esta página</p>
+    <p class="contador-titulo">Volume de esgoto retirado da Lagoinha das Taxas desde que você abriu o site - taxa de
+      17 litros por segundo:</p>
+    <div class="contador-numero" id="contador">0<span class="unidade">L</span></div>
+    <p class="contador-desc">Resultado da <strong>primeira fase das obras de interceptação</strong> (já em operação).
+      Mas sem ampliação, o esgoto continua chegando.</p>
+    <p class="contador-fonte">Fonte: <a href="#ref-1">O Globo · Concessionária Iguá, out. 2023</a></p>
+  </div>
+
+  <!-- NÚMEROS -->
+  <div class="numeros">
+    <div class="numero-item">
+      <div class="numero-valor">~70%</div>
+      <div class="numero-label">dejetos do Rio sem tratamento</div>
+      <div class="numero-fonte">Fonte: <a href="#ref-2">[2] DRHIMA/UFRJ, 2017</a></div>
+    </div>
+    <div class="numero-item">
+      <div class="numero-valor">17 L/s</div>
+      <div class="numero-label">esgoto retirado por segundo</div>
+      <div class="numero-fonte">Fonte: <a href="#ref-1">[1] O Globo, 2023</a></div>
+    </div>
+    <div class="numero-item">
+      <div class="numero-valor">3</div>
+      <div class="numero-label">dimensões inseparáveis: humana, animal, ambiental</div>
+    </div>
+    <div class="numero-item">
+      <div class="numero-valor">1990s</div>
+      <div class="numero-label">início da expansão que destruiu habitats naturais</div>
+      <div class="numero-fonte">Fonte: <a href="#ref-4">[4] Freitas-Filho, 2013</a></div>
+    </div>
+  </div>
+
+  <!-- SAÚDE ÚNICA -->
+  <div class="section-wrap reveal" id="saude-unica">
+    <p class="section-eyebrow">O conceito</p>
+    <h2 class="section-title">O que é Saúde Única?</h2>
+    <div class="section-body">
+      <p>Saúde Única (<em>One Health</em>) é a abordagem que reconhece que a saúde humana, a saúde animal e a saúde
+        ambiental são profundamente interdependentes. Não é possível cuidar de uma sem considerar as outras.</p>
+      <p>No Canal das Taxas, isso fica evidente: a degradação ambiental compromete a saúde dos jacarés, que por sua vez
+        aumenta o risco de conflito e transmissão de doenças para a população humana. As três dimensões colapsam juntas.
+      </p>
+    </div>
+    <div class="pilares">
+      <div class="pilar">
+        <div class="pilar-titulo">Saúde Humana</div>
+        <div class="pilar-texto">Doenças de veiculação hídrica, leptospirose, zoonoses e exposição a contaminantes via
+          canal transbordado em períodos de chuva.</div>
+        <p class="fonte-inline" style="margin-top:1rem">Fonte: <a href="#ref-5">[5] Sotero-Martins et al., 2024</a></p>
+      </div>
+      <div class="pilar roxo">
+        <div class="pilar-titulo">Saúde Animal</div>
+        <div class="pilar-texto">O <em>Caiman latirostris</em> acumula contaminantes no organismo e age como sentinela
+          ecológico: seu estado revela o grau de degradação do ambiente.</div>
+        <p class="fonte-inline" style="margin-top:1rem">Fonte: <a href="#ref-4">[4] Freitas-Filho, 2013</a></p>
+      </div>
+      <div class="pilar laranja">
+        <div class="pilar-titulo">Saúde Ambiental</div>
+        <div class="pilar-texto">Eutrofização, perda de biodiversidade, drenagem precária e fragmentação de habitats
+          comprometem o equilíbrio do ecossistema local.</div>
+        <p class="fonte-inline" style="margin-top:1rem">Fonte: <a href="#ref-2">[2] DRHIMA/UFRJ, 2017</a></p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- O PROBLEMA -->
+  <div class="section-wrap reveal" id="problema">
+    <p class="section-eyebrow">O território</p>
+    <h2 class="section-title">O Canal das Taxas e seus problemas</h2>
+    <div class="section-body">
+      <p>Localizado no Recreio dos Bandeirantes, o Canal das Taxas é um corredor ecológico que conecta áreas urbanas ao
+        Parque Natural Municipal Chico Mendes. Décadas de urbanização sem planejamento o transformaram num ponto de
+        vulnerabilidade sanitária e ambiental crítica.</p>
+    </div>
+    <div class="causas">
+      <div class="causa">
+        <div class="causa-num">1</div>
+        <div>
+          <div class="causa-titulo">Expansão imobiliária desordenada</div>
+          <div class="causa-desc">A partir dos anos 1990, o aterramento de brejos e a retificação do canal destruíram
+            habitats naturais, forçando a fauna silvestre — incluindo os jacarés — para dentro de áreas residenciais.
+          </div>
+          <p class="fonte-inline">Fonte: <a href="#ref-4">[4] Freitas-Filho, 2013</a></p>
+        </div>
+      </div>
+      <div class="causa">
+        <div class="causa-num">2</div>
+        <div>
+          <div class="causa-titulo">Esgoto a céu aberto e descarte irregular de lixo</div>
+          <div class="causa-desc">O lançamento de esgoto doméstico diretamente no canal agrava a eutrofização. Quase 70%
+            dos dejetos produzidos no Rio de Janeiro não recebem tratamento antes de serem despejados.</div>
+          <p class="fonte-inline">Fonte: <a href="#ref-2">[2] DRHIMA/UFRJ, 2017</a> · <a href="#ref-5">[5]
+              Sotero-Martins et al., 2024</a></p>
+        </div>
+      </div>
+      <div class="causa">
+        <div class="causa-num">3</div>
+        <div>
+          <div class="causa-titulo">Transbordamento em períodos de chuva</div>
+          <div class="causa-desc">Quando o canal transborda, jacarés e agentes patogênicos — incluindo a
+            <em>Leptospira</em> — chegam às ruas e áreas de convivência direta com moradores. Dados do DATASUS indicam
+            correlação direta entre déficit de saneamento e internações por DRSAI.
+          </div>
+          <p class="fonte-inline">Fonte: <a href="#ref-5">[5] Sotero-Martins et al., 2024</a></p>
+        </div>
+      </div>
+      <div class="causa">
+        <div class="causa-num">4</div>
+        <div>
+          <div class="causa-titulo">Ausência de ação pública eficaz</div>
+          <div class="causa-desc">Apesar da legislação ambiental vigente (Lei de Crimes Ambientais), a fiscalização é
+            insuficiente. Moradores entrevistados desconhecem os canais de denúncia disponíveis.</div>
+          <p class="fonte-inline">Fonte: <a href="#ref-6">[6] Escuta ativa com morador — grupo IBMR, 2026</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- MAPA -->
+  <div class="section-wrap reveal" id="mapa">
+    <p class="section-eyebrow">Território</p>
+    <h2 class="section-title">Onde fica o Canal das Taxas</h2>
+    <div class="section-body">
+      <p>A área de estudo compreende o Canal das Taxas e seu entorno, com foco na Comunidade do Terreirão e na
+        proximidade com o Parque Natural Municipal Chico Mendes.</p>
+    </div>
+    <div class="mapa-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3674.5!2d-43.4485!3d-23.0085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9bda259e0e5c4b%3A0x7a2d9a5bbdb3a!2sCanal%20das%20Taxas%2C%20Recreio%20dos%20Bandeirantes%2C%20Rio%20de%20Janeiro!5e0!3m2!1spt-BR!2sbr!4v1718000000000"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Mapa do Canal das Taxas, Recreio dos Bandeirantes">
+      </iframe>
+      <div class="mapa-legenda">
+        <div class="legenda-item">
+          <div class="legenda-dot" style="background:#1A9E78"></div><span>Canal das Taxas</span>
+        </div>
+        <div class="legenda-item">
+          <div class="legenda-dot" style="background:#C8522A"></div><span>Comunidade do Terreirão</span>
+        </div>
+        <div class="legenda-item">
+          <div class="legenda-dot" style="background:#7F77DD"></div><span>Parque Chico Mendes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ENTREVISTAS -->
+  <div class="section-wrap reveal" id="entrevistas">
+    <p class="section-eyebrow">Escuta ativa</p>
+    <h2 class="section-title">Entrevistas de campo</h2>
+    <div class="section-body">
+      <p>Como dados primários, o grupo realizou escuta ativa com uma ambientalista local e um morador da região do
+        Terreirão, buscando compreender a percepção territorial e os impactos vivenciados no cotidiano.</p>
+    </div>
+
+    <div class="entrevistas-wrap">
+      <!-- Cabeçalhos dos dois entrevistados -->
+      <div class="entrevistas-cards">
+        <div class="entrevista-card">
+          <div class="entrevista-avatar av-verde">A</div>
+          <div>
+            <div class="entrevista-nome">Ambientalista local</div>
+            <div class="entrevista-cargo">Especialista em fauna e habitat — Canal das Taxas</div>
+          </div>
+        </div>
+        <div class="entrevista-card">
+          <div class="entrevista-avatar av-laranja">M</div>
+          <div>
+            <div class="entrevista-nome">Morador do Terreirão</div>
+            <div class="entrevista-cargo">Residente próximo ao Canal das Taxas</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vídeo único com ambos -->
+      <div class="video-unico">
+        <!--
+        INSTRUÇÃO: substitua o atributo src abaixo pelo link de embed do YouTube.
+        Exemplo: https://www.youtube.com/embed/SEU_ID_AQUI
+        Se o vídeo não estiver no YouTube, use a tag <video> no lugar do <iframe>.
+      -->
+        <iframe src="https://www.youtube.com/embed/nnOLmSLjzYs"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen title="Entrevista com ambientalista e morador do Terreirão">
+        </iframe>
+        <!--
+        Quando tiver o link, remova o <div class="video-placeholder"> acima
+        e descomente o iframe abaixo, trocando o src:
+        
+      -->
+        <span class="video-badge">Entrevista · Campo 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- GALERIA -->
+  <div class="section-wrap reveal" id="galeria">
+    <p class="section-eyebrow">Registro de campo</p>
+    <h2 class="section-title">Galeria fotográfica</h2>
+    <div class="section-body">
+      <p>11 imagens coletadas durante as visitas ao Canal das Taxas e à Comunidade do Terreirão. Substitua cada
+        <code>src</code> pelo link direto da sua foto.
+      </p>
+    </div>
+
+    <div class="galeria-grid" id="galeria-grid">
+
+      <!-- FOTO 1 — destaque (2×2) -->
+      <div class="foto-item foto-destaque" data-index="0">
+        <div class="foto-inner">
+          <img
+            src="https://res.cloudinary.com/di1wmo3dv/image/upload/v1781306237/WhatsApp_Image_2026-06-12_at_20.00.37_1_bpqawj.jpg">
+          <div class="foto-overlay"></div>
+        </div>
+      </div>
+
+      <!-- FOTO 2 -->
+      <div class="foto-item" data-index="1">
+        <div class="foto-inner">
+          <img
+            src="https://res.cloudinary.com/di1wmo3dv/image/upload/v1781306238/WhatsApp_Image_2026-06-12_at_20.00.37_tywd1y.jpg">
+          <div class="foto-overlay"></div>
+        </div>
+      </div>
+
+      <!-- FOTO 3 -->
+      <div class="foto-item" data-index="2">
+        <div class="foto-inner">
+          <img
+            src="https://res.cloudinary.com/di1wmo3dv/image/upload/v1781306238/WhatsApp_Image_2026-06-12_at_20.00.38_c5mgq4.jpg">
+          <div class="foto-overlay"></div>
+        </div>
+      </div>
+
+      <!-- FOTO 4 -->
+      <div class="foto-item" data-index="3">
+        <div class="foto-inner">
+          <img
+            src="https://res.cloudinary.com/di1wmo3dv/image/upload/v1781306237/WhatsApp_Image_2026-06-12_at_20.00.36_2_ftemad.jpg">
+          <div class="foto-overlay"></div>
+        </div>
+      </div>
+
+      <!-- FOTO 5 -->
+      <div class="foto-item" data-index="4">
+        <div class="foto-inner">
+          <img
+            src="https://res.cloudinary.com/di1wmo3dv/image/upload/v1781306237/WhatsApp_Image_2026-06-12_at_20.00.36_1_oysmn8.jpg">
+          <div class="foto-overlay"></div>
+        </div>
+      </div>
+
+      <!-- FOTO 6 -->
+      <div class="foto-item" data-index="5">
+        <div class="foto-inner">
+          <img
+            src="https://res.cloudinary.com/di1wmo3dv/image/upload/v1781306238/WhatsApp_Image_2026-06-12_at_20.00.38_2_ael820.jpg">
+          <div class="foto-overlay"></div>
+        </div>
+      </div>
+
+      <!-- FOTO 7 -->
+      <div class="foto-item" data-index="6">
+        <div class="foto-inner">
+          <img
+            src="https://res.cloudinary.com/di1wmo3dv/image/upload/v1781306237/WhatsApp_Image_2026-06-12_at_20.00.37_2_kt65qy.jpg">
+          <div class="foto-overlay"></div>
+        </div>
+      </div>
+
+      <!-- FOTO 8 -->
+      <div class="foto-item" data-index="7">
+        <div class="foto-inner">
+          <img
+            src="https://res.cloudinary.com/di1wmo3dv/image/upload/v1781306237/WhatsApp_Image_2026-06-12_at_20.00.36_re0izi.jpg">
+          <div class="foto-overlay"></div>
+        </div>
+      </div>
+
+      <!-- FOTO 9 -->
+      <div class="foto-item" data-index="8">
+        <div class="foto-inner">
+          <img
+            src="https://res.cloudinary.com/di1wmo3dv/image/upload/v1781306238/WhatsApp_Image_2026-06-12_at_20.00.38_3_etogqt.jpg">
+          <div class="foto-overlay"></div>
+        </div>
+      </div>
+
+      <!-- FOTO 10 -->
+      <div class="foto-item" data-index="9">
+        <div class="foto-inner">
+          <img
+            src="https://res.cloudinary.com/di1wmo3dv/image/upload/v1781306238/WhatsApp_Image_2026-06-12_at_20.00.38_4_tvbyt3.jpg">
+          <div class="foto-overlay"></div>
+        </div>
+      </div>
+
+      <!-- FOTO 11 -->
+      <div class="foto-item" data-index="10">
+        <div class="foto-inner">
+          <img
+            src="https://res.cloudinary.com/di1wmo3dv/image/upload/v1781306237/WhatsApp_Image_2026-06-12_at_20.00.38_1_my1clc.jpg">
+          <div class="foto-overlay"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- AÇÕES -->
+  <div class="section-wrap reveal" id="acoes">
+    <p class="section-eyebrow">O que cobrar</p>
+    <h2 class="section-title">Prioridades de ação</h2>
+    <div class="section-body">
+      <p>As soluções para o Canal das Taxas passam necessariamente por políticas públicas. As prioridades abaixo foram
+        identificadas considerando relevância, viabilidade e impacto direto no território.</p>
+    </div>
+    <div class="prioridades">
+      <div class="prioridade">
+        <div class="prioridade-icon">🏗️</div>
+        <div>
+          <div class="prioridade-titulo">Ampliação urgente do saneamento básico</div>
+          <div class="prioridade-desc">Expandir o esgotamento sanitário ao longo do canal, com atenção especial à
+            Comunidade do Terreirão. A primeira fase das obras já retira 17 L/s — mas precisa avançar. Municípios com
+            déficit de saneamento apresentam as maiores taxas de internação por DRSAI.</div>
+          <p class="fonte-inline">Fonte: <a href="#ref-5">[5] Sotero-Martins et al., 2024</a></p>
+        </div>
+      </div>
+      <div class="prioridade">
+        <div class="prioridade-icon">📣</div>
+        <div>
+          <div class="prioridade-titulo">Educação ambiental comunitária</div>
+          <div class="prioridade-desc">Campanhas voltadas aos moradores sobre os riscos de alimentar e se aproximar dos
+            jacarés, sobre como identificar riscos sanitários e sobre os canais de denúncia disponíveis (INEA, SMAC).
+          </div>
+          <p class="fonte-inline">Fonte: <a href="#ref-1">[1] Escuta ativa — grupo IBMR, 2026</a></p>
+        </div>
+      </div>
+      <div class="prioridade">
+        <div class="prioridade-icon">🪧</div>
+        <div>
+          <div class="prioridade-titulo">Sinalização e fiscalização no entorno do canal</div>
+          <div class="prioridade-desc">Instalação de placas informativas sobre riscos zoonóticos e a ilegalidade de
+            alimentar animais silvestres, com contatos para denúncia e resgate (INEA e Patrulha Ambiental da SMAC).
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMPACTO -->
+  <div class="impacto">
+    <blockquote>"A degradação do Canal das Taxas não é natural — <em>é política.</em>"</blockquote>
+    <cite>Saúde humana, animal e ambiental dependem de vontade política e ação coletiva.</cite>
+  </div>
+
+  <!-- EQUIPE -->
+  <div class="section-wrap reveal" id="equipe">
+    <p class="section-eyebrow">Autoria</p>
+    <h2 class="section-title">Equipe de pesquisa</h2>
+    <div class="section-body">
+      <p>Trabalho apresentado ao curso de Psicologia do IBMR como requisito parcial para a disciplina Saúde Única:
+        Humanos, Animais, Ambiente e Sociedade. Docentes: Elliz Celestrini Mangabeira e Jessica Aparecida Machado Zadra.
+      </p>
+    </div>
+    <div class="equipe-grid">
+      <div class="membro">
+        <div class="membro-nome">Davi Medeiros da Silva</div>
+        <div class="membro-ra">RA 12624217382</div>
+        <div class="membro-tarefa">Estudante de Psicologia</div>
+      </div>
+      <div class="membro">
+        <div class="membro-nome">Hierro Cunha Braga</div>
+        <div class="membro-ra">RA 1262512025</div>
+        <div class="membro-tarefa">Estudante de Psicologia</div>
+      </div>
+      <div class="membro">
+        <div class="membro-nome">João Carlos N. de Souza</div>
+        <div class="membro-ra">RA 12625123224</div>
+        <div class="membro-tarefa">Estudante de Psicologia</div>
+      </div>
+      <div class="membro">
+        <div class="membro-nome">João Guilherme F. da Silva</div>
+        <div class="membro-ra">RA 12625122863</div>
+        <div class="membro-tarefa">Estudante de Psicologia</div>
+      </div>
+      <div class="membro">
+        <div class="membro-nome">Maria Eduarda M. F. Marins</div>
+        <div class="membro-ra">RA 12625110281</div>
+        <div class="membro-tarefa">Estudante de Psicologia</div>
+      </div>
+      <div class="membro">
+        <div class="membro-nome">Maria Heloisa M. de Souza</div>
+        <div class="membro-ra">RA 12624217813</div>
+        <div class="membro-tarefa">Estudante de Psicologia</div>
+      </div>
+      <div class="membro">
+        <div class="membro-nome">Milena Cellos Andrade</div>
+        <div class="membro-ra">RA 12625121353</div>
+        <div class="membro-tarefa">Estudante de Psicologia</div>
+      </div>
+      <div class="membro">
+        <div class="membro-nome">Simone Sanches S. Ferreira</div>
+        <div class="membro-ra">RA 12625120993</div>
+        <div class="membro-tarefa">Estudante de Psicologia</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- REFERÊNCIAS -->
+  <div class="section-wrap">
+    <p class="section-eyebrow">Fontes</p>
+    <h2 class="section-title">Referências bibliográficas</h2>
+    <div class="refs">
+      <div class="ref" id="ref-1"><span class="ref-id">[1]</span> O Globo, 18/10/2023; <em>Concessionária Iguá instala
+          sistema que retira 17 L/s de esgoto do Canal das Taxas.</em> Disponível em: <a
+          href="https://oglobo.globo.com/rio/bairros/barra/noticia/2023/10/18/canal-das-taxas-no-recreio-ganha-sistema-contra-despejo-irregular-de-esgoto.ghtml"
+          target="_blank" rel="noopener" style="color:var(--verde)">oglobo.globo.com</a>. Acesso em: 14 mai. 2026.</div>
+
+      <div class="ref" id="ref-2"><span class="ref-id">[2]</span> DRHIMA/UFRJ. <em>No Rio, quase 70% dos dejetos não são
+          tratados antes de serem despejados.</em> Rio de Janeiro, 2017. Disponível em: <a
+          href="https://www.drhima.poli.ufrj.br/destaque/noticias/170-no-rio-quase-70-dos-dejetos-nao-sao-tratados-antes-de-serem-despejados-leia-mais-https-oglobo-globo-com-economia-no-rio-quase-70-dos-dejetos-nao-sao-tratados-antes-de-serem-despejados-21865486-ixzz4wkg8xvad-stest"
+          target="_blank" rel="noopener" style="color:var(--verde)">drhima.poli.ufrj.br</a>. Acesso em: 14 mai. 2026.
+      </div>
+
+     
+
+      <div class="ref" id="ref-4"><span class="ref-id">[3]</span> FREITAS-FILHO, Ricardo Ferreira. <em>Ecologia do
+          jacaré de papo amarelo (Caiman latirostris) em ambientes urbanos no município do Rio de Janeiro.</em> 2013.
+        Tese (Doutorado) — Universidade do Estado do Rio de Janeiro. Disponível em: <a
+          href="https://www.bdtd.uerj.br:8443/bitstream/1/4925/1/FREITAS_FILHO_2013.pdf" target="_blank" rel="noopener"
+          style="color:var(--verde)">bdtd.uerj.br</a>. Acesso em: 14 mai. 2026.</div>
+
+
+      <div class="ref" id="ref-5"><span class="ref-id">[4]</span> SOTERO-MARTINS, Adriana et al. Aspectos dos serviços
+        de saneamento de água e esgotamento sanitário na região metropolitana do Rio de Janeiro antes e depois da Lei
+        14.026/2020. In: HANDAM, Natasha B.; SOTERO-MARTINS, Adriana (org.). <em>Saneamento, Saúde e Ambiente</em> —
+        Volume 1. Belo Horizonte: Editora Poisson, 2024. p. 165–188. DOI: <a
+          href="https://livros.poisson.com.br/individuais/Saneamento_Saude_Ambiente/volume1/Saneamento_Saude_Ambiente_Vol1.pdf"
+          target="_blank" rel="noopener" style="color:var(--verde)">10.36229/978-65-5866-385-0.CAP.11</a>.</div>
+    </div>
+
+
+    <div class="ref" id="ref-6"><span class="ref-id">[5]</span> Entrevista com especialistas em saneamento e Moradores. <em>YouTube</em> —
+       Disponível em: <a
+          href="https://youtu.be/nnOLmSLjzYs"
+          target="_blank" rel="noopener" style="color:var(--verde)">youtube.com</a>.</div>
+    </div>
+  </div>
+
+  <footer>
+    <strong>Canal das Taxas · Saúde Única no Ambiente Urbano</strong><br>
+    IBMR Barra da Tijuca · Psicologia · 3º Período · 2026<br>
+    Docentes: Elliz Celestrini Mangabeira &amp; Jessica Aparecida Machado Zadra
+  </footer>
+
+  <script>
+    /* ── CONTADOR ── */
+    const LITROS_POR_SEGUNDO = 17;
+    const inicio = Date.now();
+    const el = document.getElementById('contador');
+    function formatar(n) {
+      if (n >= 1000000) return (n / 1000000).toFixed(2).replace('.', ',') + '<span class="unidade"> M/L</span>';
+      if (n >= 1000) return (n / 1000).toFixed(1).replace('.', ',') + '<span class="unidade"> mil L</span>';
+      return Math.floor(n) + '<span class="unidade"> L</span>';
+    }
+    let ultimoMilhar = 0;
+    function atualizar() {
+      const seg = (Date.now() - inicio) / 1000;
+      const total = seg * LITROS_POR_SEGUNDO;
+      el.innerHTML = formatar(total);
+      const milhar = Math.floor(total / 1000);
+      if (milhar > ultimoMilhar) {
+        ultimoMilhar = milhar;
+        el.classList.remove('contador-pulso');
+        void el.offsetWidth;
+        el.classList.add('contador-pulso');
+      }
+      requestAnimationFrame(atualizar);
+    }
+    atualizar();
+
+    /* ── NAV MOBILE ── */
+    const toggle = document.getElementById('nav-toggle');
+    const links = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+    /* ── BACK TO TOP ── */
+    const backTop = document.getElementById('back-top');
+    window.addEventListener('scroll', () => backTop.classList.toggle('show', window.scrollY > 400));
+    backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    /* ── SCROLL REVEAL ── */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ── LIGHTBOX ── */
+    const fotos = Array.from(document.querySelectorAll('.foto-item'));
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbCaption = document.getElementById('lb-caption');
+    let currentIdx = 0;
+
+    function openLB(idx) {
+      currentIdx = idx;
+      const img = fotos[idx].querySelector('img');
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lbCaption.textContent = (idx + 1) + ' / ' + fotos.length + '    ' + img.alt;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLB() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function moveLB(dir) {
+      openLB((currentIdx + dir + fotos.length) % fotos.length);
+    }
+
+    fotos.forEach((f, i) => f.addEventListener('click', () => openLB(i)));
+    document.getElementById('lb-close').addEventListener('click', closeLB);
+    document.getElementById('lb-prev').addEventListener('click', () => moveLB(-1));
+    document.getElementById('lb-next').addEventListener('click', () => moveLB(1));
+    lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLB();
+      if (e.key === 'ArrowLeft') moveLB(-1);
+      if (e.key === 'ArrowRight') moveLB(1);
+    });
+  </script>
+</body>
+
+</html>
